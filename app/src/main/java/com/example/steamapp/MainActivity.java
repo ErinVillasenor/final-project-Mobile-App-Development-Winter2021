@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity
         this.steamSearchViewModel = new ViewModelProvider(this)
                 .get(SteamSearchViewModel.class);
 
-
         Button searchButton = (Button)findViewById(R.id.btn_search);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
