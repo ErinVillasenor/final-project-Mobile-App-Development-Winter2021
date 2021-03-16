@@ -11,4 +11,10 @@ public interface SteamService {
             @Query("steamids") String player_id,
             @Query("key") String api_key
     );
+
+    @GET("ISteamUser/GetFriendList/v0001")
+    Call<FriendsList> searchFriends(
+            @Query("steamids") String player_id,
+            @Query("key") String api_key
+    );
 }
