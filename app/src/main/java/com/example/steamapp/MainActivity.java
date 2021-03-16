@@ -25,9 +25,11 @@ import android.widget.TextView;
 
 import com.example.steamapp.data.LoadingStatus;
 import com.example.steamapp.data.PlayerData;
+import com.example.steamapp.data.PlayerSummary;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener, SteamPlayerAdapter.OnPlayerClickListener {
 
     private static final String STEAM_API_KEY = BuildConfig.STEAM_API_KEY;
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.loadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
         this.errorMessageTV = findViewById(R.id.tv_error_message);
 
-        this.steamPlayerAdapter = new SteamPlayerAdapter();
+        this.steamPlayerAdapter = new SteamPlayerAdapter(this);
         this.searchResultsRV.setAdapter(steamPlayerAdapter);
 
         this.steamSearchViewModel = new ViewModelProvider(this)
@@ -156,7 +158,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         this.drawerLayout.closeDrawers();
@@ -174,5 +175,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             default:
                 return false;
         }
+    }
+
+    @Override
+    public void onPlayerClick(PlayerSummary playerSummary) {
+        Intent intent = new Intent(this, FriendsActivity.class);
+        startActivity(intent);
     }
 }

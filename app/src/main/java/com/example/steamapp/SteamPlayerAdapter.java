@@ -17,8 +17,18 @@ import com.example.steamapp.data.PlayerSummary;
 
 public class SteamPlayerAdapter extends RecyclerView.Adapter<SteamPlayerAdapter.SearchResultViewHolder>{
 
-    private PlayerData playerData;
     private static final String TAG = SteamPlayerAdapter.class.getSimpleName();
+
+    private PlayerData playerData;
+    private OnPlayerClickListener onPlayerClickListener;
+
+    public interface OnPlayerClickListener {
+        void onPlayerClick(PlayerSummary playerSummary);
+    }
+
+    public SteamPlayerAdapter(OnPlayerClickListener onPlayerClickListener) {
+        this.onPlayerClickListener = onPlayerClickListener;
+    }
 
     public void updateSearchResults(PlayerData searchResultsList) {
         this.playerData = searchResultsList;
