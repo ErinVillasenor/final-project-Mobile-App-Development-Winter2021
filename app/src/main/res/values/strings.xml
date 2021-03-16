@@ -7,4 +7,9 @@
     <string name="pref_player_key" translatable="false">pref_player</string>
     <string name="pref_player_title">Default Steam ID</string>
 
+    <!--Drawer/Menu-->
+    <string name="nav_search">Search</string>
+    <string name="nav_bookmarked_repos">Bookmarked (weathers?)</string>
+    <string name="nav_settings">Bookmark this (weather?)</string>
+
 </resources>

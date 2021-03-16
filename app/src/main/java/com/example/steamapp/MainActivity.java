@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,8 +25,9 @@ import android.widget.TextView;
 
 import com.example.steamapp.data.LoadingStatus;
 import com.example.steamapp.data.PlayerData;
+import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String STEAM_API_KEY = BuildConfig.STEAM_API_KEY;
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar loadingIndicatorPB;
     private TextView errorMessageTV;
 
+    private DrawerLayout drawerLayout;
+    private RecyclerView drawerRV;
     private SteamPlayerAdapter steamPlayerAdapter;
 
     // lifecycle stuff
@@ -51,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
 
         this.searchResultsRV.setLayoutManager(new LinearLayoutManager(this));
         this.searchResultsRV.setHasFixedSize(true);
+
+
+        this.drawerLayout = findViewById(R.id.drawer_layout);
+
+        this.drawerRV = findViewById(R.id.rv_nav_drawer);
+        this.drawerRV.setLayoutManager(new LinearLayoutManager(this));
+        this.drawerRV.setHasFixedSize(true);
 
         this.loadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
         this.errorMessageTV = findViewById(R.id.tv_error_message);
@@ -72,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        RecyclerView drawerRV = findViewById(R.id.rv_nav_drawer);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -134,9 +148,31 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
+            case android.R.id.home:
+                this.drawerLayout.openDrawer(GravityCompat.START);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        this.drawerLayout.closeDrawers();
+        switch (item.getItemId()) {
+            case R.id.nav_search:
+                return true;
+//            case R.id.nav_bookmarked_repos:
+//                Intent bookmarkedReposIntent = new Intent(this, BookmarkedRepos.class);
+//                startActivity(bookmarkedReposIntent);
+//                return true;
+            case R.id.nav_settings:
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
+            default:
+                return false;
+        }
+    }
 }
