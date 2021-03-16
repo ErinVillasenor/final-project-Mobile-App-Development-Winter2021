@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">AppSteam</string>
     <string name="loading_error">Unable to execute search. Please check your internet connection.</string>
+
+    <!--Settings-->
+    <string name="action_settings">Settings</string>
+    <string name="pref_player_key" translatable="false">pref_player</string>
+    <string name="pref_player_title">Default Steam ID</string>
+
 </resources>
