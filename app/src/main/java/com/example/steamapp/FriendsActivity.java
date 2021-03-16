@@ -31,7 +31,7 @@ public class FriendsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends_activity);
+        setContentView(R.layout.activity_friends);
 
         this.loadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
         this.searchResultsRV = findViewById(R.id.rv_search_results);
