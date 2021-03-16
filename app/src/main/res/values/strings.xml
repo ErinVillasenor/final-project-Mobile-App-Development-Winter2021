@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AppSteam</string>
+    <string name="loading_error">Unable to execute search. Please check your internet connection.</string>
+</resources>
