@@ -13,8 +13,14 @@
         android:theme="@style/Theme.SteamApp">
 
         <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".FriendsActivity"
             android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".GamesActivity"
+            android:parentActivityName=".FriendsActivity"/>
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.SteamApp.NoActionBar"
@@ -25,11 +31,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity" />
-
     </application>
 
 </manifest>

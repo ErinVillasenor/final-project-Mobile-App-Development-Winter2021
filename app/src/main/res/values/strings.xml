@@ -10,7 +10,10 @@
 
     <!--Drawer/Menu-->
     <string name="nav_search">Search</string>
-    <string name="nav_bookmarked_repos">Bookmarked (weathers?)</string>
-    <string name="nav_settings">Bookmark this (weather?)</string>
+    <string name="nav_bookmarked_repos">Bookmarked Steam IDs</string>
+    <string name="nav_settings">Bookmark this Steam ID</string>
+
+    <!--Games-->
+    <string name="action_games">Games</string>
 
 </resources>
