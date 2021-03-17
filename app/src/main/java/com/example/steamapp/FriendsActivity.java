@@ -63,8 +63,9 @@ public class FriendsActivity extends AppCompatActivity {
 
             // DON'T REALLY NEED THIS STUFF, WE ONLY NEED THE STEAM ID, WHICH
             // WE CAN ACCESS FROM this.playerSummary
-            // TextView playerSummaryTV = findViewById(R.id.tv_friends);
-            // playerSummaryTV.setText(this.playerSummary.getSteamid());
+            // So, get rid of these two lines when you've seen the new activity opening
+             TextView playerSummaryTV = findViewById(R.id.tv_friends);
+             playerSummaryTV.setText(this.playerSummary.getSteamid());
         }
 
         this.friendSearchViewModel.getFriendSearchResults().observe(
