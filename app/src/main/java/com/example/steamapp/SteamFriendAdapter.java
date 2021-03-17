@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.steamapp.data.Friend;
+import com.example.steamapp.data.FriendInfo;
 import com.example.steamapp.data.FriendsList;
 
 public class SteamFriendAdapter extends RecyclerView.Adapter<SteamFriendAdapter.SearchResultViewHolder>{
@@ -27,7 +28,7 @@ public class SteamFriendAdapter extends RecyclerView.Adapter<SteamFriendAdapter.
         if (this.friendsList == null || this.friendsList.getFriends() == null) {
             return 0;
         } else {
-            return this.friendsList.getFriends().size();
+            return this.friendsList.getFriends().getFriendInfo().size();
         }
     }
 
@@ -41,7 +42,7 @@ public class SteamFriendAdapter extends RecyclerView.Adapter<SteamFriendAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull SteamFriendAdapter.SearchResultViewHolder holder, int position) {
-        holder.bind(this.friendsList.getFriends().get(position));
+        holder.bind(this.friendsList.getFriends().getFriendInfo().get(position));
     }
 
     class SearchResultViewHolder extends RecyclerView.ViewHolder {
@@ -52,7 +53,7 @@ public class SteamFriendAdapter extends RecyclerView.Adapter<SteamFriendAdapter.
             this.searchResultTV = itemView.findViewById(R.id.tv_search_result);
         }
 
-        void bind(Friend searchResult) {
+        void bind(FriendInfo searchResult) {
             Log.d(TAG, "data from bind fx: " + searchResult.getSteamid());
             Context ctx = this.itemView.getContext();
 

@@ -34,7 +34,7 @@ public class FriendSearchRepository {
         this.loadingStatus.setValue(LoadingStatus.SUCCESS);
 
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Friend.class, new Friend.JsonDeserializer())
+                .registerTypeAdapter(FriendInfo.class, new FriendInfo.JsonDeserializer())
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()

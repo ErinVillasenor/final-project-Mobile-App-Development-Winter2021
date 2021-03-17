@@ -6,11 +6,11 @@ import java.util.List;
 
 public class FriendsList {
     @SerializedName("friendslist")
-    public List<Friend> friends;
+    public Friend friends;
 
     public FriendsList(){
         this.friends = null;
     }
 
-    public List<Friend> getFriends() { return friends; }
+    public Friend getFriends() { return friends; }
 }
