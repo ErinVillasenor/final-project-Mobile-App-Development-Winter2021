@@ -7,72 +7,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/et_search_box"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        android:hint="Search Steam ID..." />
-
-    <Button
-        android:id="@+id/btn_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="Do Search"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_search_results"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
-        <!--    for error messages-->
-        <TextView
-            android:id="@+id/tv_error_message"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/et_search_box"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textAppearance="?attr/errorTextAppearance"
-            android:textSize="36dp"
-            android:visibility="invisible"
-            android:text="@string/loading_error"/>
+            android:textSize="22sp"
+            android:hint="Search Steam ID..." />
 
-        <ProgressBar
-            android:id="@+id/pb_loading_indicator"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginTop="32dp"
-            android:layout_gravity="top|center_horizontal"
-            android:visibility="invisible"/>
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:text="Do Search"/>
 
-    </FrameLayout>
-</LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/rv_nav_drawer"
-    android:layout_width="300dp"
-    android:layout_height="match_parent"
-    android:layout_gravity="start"
-    android:fitsSystemWindows="true"
-    android:background="@color/white"
-    app:menu="@menu/nav_drawer"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_search_results"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#f2f2f2"/>
+
+            <!--    for error messages-->
+            <TextView
+                android:id="@+id/tv_error_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:textAppearance="?attr/errorTextAppearance"
+                android:textSize="36dp"
+                android:visibility="invisible"
+                android:text="@string/loading_error"/>
+
+            <ProgressBar
+                android:id="@+id/pb_loading_indicator"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginTop="32dp"
+                android:layout_gravity="top|center_horizontal"
+                android:visibility="invisible"/>
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <!--    drawer stuff-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_nav_drawer"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:background="@color/drawer_color"
         />
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
