@@ -66,13 +66,13 @@
 </LinearLayout>
 
 <androidx.recyclerview.widget.RecyclerView
-android:id="@+id/rv_nav_drawer"
-android:layout_width="300dp"
-android:layout_height="match_parent"
-android:layout_gravity="start"
-android:fitsSystemWindows="true"
-android:background="@color/white"
-app:menu="@menu/nav_drawer"
-    />
+    android:id="@+id/rv_nav_drawer"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    app:menu="@menu/nav_drawer"
+        />
 
     </androidx.drawerlayout.widget.DrawerLayout>

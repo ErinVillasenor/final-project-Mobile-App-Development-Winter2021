@@ -47,7 +47,7 @@
                 android:id="@+id/rv_search_results"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:outlineAmbientShadowColor="@color/cardview_dark_background"/>
+                />
 
             <!--    for error messages-->
             <TextView
