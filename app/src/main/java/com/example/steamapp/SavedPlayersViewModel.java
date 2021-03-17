@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.steamapp.data.AppDatabase;
 import com.example.steamapp.data.SavedPlayer;
 import com.example.steamapp.data.SavedPlayersRepository;
 

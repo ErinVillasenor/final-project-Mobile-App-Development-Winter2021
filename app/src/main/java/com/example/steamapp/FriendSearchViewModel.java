@@ -3,7 +3,6 @@ package com.example.steamapp;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.steamapp.data.Friend;
 import com.example.steamapp.data.FriendSearchRepository;
 import com.example.steamapp.data.FriendsList;
 import com.example.steamapp.data.LoadingStatus;

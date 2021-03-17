@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.steamapp.data.Friend;
 import com.example.steamapp.data.FriendInfo;
 import com.example.steamapp.data.FriendsList;
 

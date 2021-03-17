@@ -8,7 +8,6 @@ import com.google.gson.JsonParseException;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 public class PlayerSummary implements Serializable {
 
