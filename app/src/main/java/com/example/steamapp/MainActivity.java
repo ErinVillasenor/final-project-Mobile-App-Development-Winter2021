@@ -174,7 +174,6 @@ public class MainActivity extends AppCompatActivity
                         } else {
                             loadingIndicatorPB.setVisibility(View.INVISIBLE);
                             errorMessageTV.setVisibility(View.VISIBLE);
-                            Log.d(TAG, "Load error ");
 
                             // use this for RecyclerView
                             // forecastListRV.setVisibility(View.INVISIBLE);
@@ -197,8 +196,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onSearchResultClicked(SavedPlayer savedPlayer) {
         SharedPreferences.Editor sharedPreferencesEditor = this.sharedPreferences.edit();
-        sharedPreferencesEditor.putString(getString(R.string.pref_player_key), savedPlayer.name);
+        sharedPreferencesEditor.putString(getString(R.string.pref_player_key), savedPlayer.id);
         sharedPreferencesEditor.apply();
+        performSteamIDSearch(STEAM_API_KEY, savedPlayer.id);
+        this.drawerLayout.closeDrawers();
     }
 
     private void performSteamIDSearch(String API_KEY, String playerID){
@@ -290,6 +291,9 @@ public class MainActivity extends AppCompatActivity
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         String plid = this.sharedPreferences.getString(getString(R.string.pref_player_key), "0");
         performSteamIDSearch(STEAM_API_KEY, plid);
+        long ltime = System.currentTimeMillis();
+        SavedPlayer savedPlayer = new SavedPlayer(plid, ltime);
+        savedPlayersViewModel.insertPlayer(savedPlayer);
         mToast();
     }
 }
