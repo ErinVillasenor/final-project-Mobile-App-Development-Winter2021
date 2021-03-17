@@ -1,10 +1,12 @@
 package com.example.steamapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.steamapp.data.FriendsList;
 import com.example.steamapp.data.LoadingStatus;
 import com.example.steamapp.data.PlayerSummary;
@@ -34,6 +37,9 @@ public class FriendsActivity extends AppCompatActivity {
     private SteamFriendAdapter steamFriendAdapter;
 
     private PlayerSummary playerSummary = null;
+    private TextView friendName;
+    private TextView friendStatus;
+    private ImageView friendAvatar;
 
     // lifecycle stuff
     private FriendSearchViewModel friendSearchViewModel = null;
@@ -55,6 +61,10 @@ public class FriendsActivity extends AppCompatActivity {
         this.steamFriendAdapter = new SteamFriendAdapter();
         this.searchResultsRV.setAdapter(steamFriendAdapter);
 
+        this.friendName = findViewById(R.id.tv_player_name);
+        this.friendStatus = findViewById(R.id.tv_player_status);
+        this.friendAvatar = findViewById(R.id.iv_player_avatar);
+
         this.friendSearchViewModel = new ViewModelProvider(this)
                 .get(FriendSearchViewModel.class);
 
@@ -62,15 +72,45 @@ public class FriendsActivity extends AppCompatActivity {
 
         if (intent != null && intent.hasExtra(EXTRA_PLAYER_DATA)) {
             this.playerSummary = (PlayerSummary)intent.getSerializableExtra(EXTRA_PLAYER_DATA);
-
-            // DON'T REALLY NEED THIS STUFF, WE ONLY NEED THE STEAM ID, WHICH
-            // WE CAN ACCESS FROM this.playerSummary
-            // So, get rid of these two lines when you've seen the new activity opening
-            //TextView playerSummaryTV = findViewById(R.id.tv_friends);
-            //playerSummaryTV.setText(this.playerSummary.getSteamid());
         }
 
         friendSearchViewModel.loadFriendSearchResults(STEAM_API_KEY, this.playerSummary.getSteamid());
+
+        this.friendName.setText(this.playerSummary.getPersonaname());
+
+        // Display status as string value equivalent
+        String status;
+        switch (this.playerSummary.getPersonastate()) {
+            case 0:
+                status = "Offline";
+                break;
+            case 1:
+                status = "Online";
+                break;
+            case 2:
+                status = "Busy";
+                break;
+            case 3:
+                status = "Away";
+                break;
+            case 4:
+                status = "Snooze";
+                break;
+            case 5:
+                status = "Looking to Trade";
+                break;
+            case 6:
+                status = "Looking to Play";
+                break;
+            default:
+                status = "Thinking";
+        }
+        this.friendStatus.setText(status);
+
+        // Load forecast icon into ImageView using Glide: https://bumptech.github.io/glide/
+        Glide.with(this)
+                .load(this.playerSummary.getAvatar())
+                .into(this.friendAvatar);
 
         this.friendSearchViewModel.getFriendSearchResults().observe(
                 this,
