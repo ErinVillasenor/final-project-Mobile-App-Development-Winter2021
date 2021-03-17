@@ -59,7 +59,7 @@ public class SavedPlayerAdapter extends RecyclerView.Adapter <SavedPlayerAdapter
 
         SavedPlayerViewHolder(View itemView) {
             super(itemView);
-            savedNameTV = itemView.findViewById(R.id.tv_savedplayer_name);
+           // savedNameTV = itemView.findViewById(R.id.tv_savedplayer_name);
             savedidTV = itemView.findViewById(R.id.tv_savedplayer_id);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +73,7 @@ public class SavedPlayerAdapter extends RecyclerView.Adapter <SavedPlayerAdapter
         }
 
         void bind(SavedPlayer savedPlayer){
-            savedNameTV.setText(savedPlayer.name);
+            //savedNameTV.setText(savedPlayer.name);
             savedidTV.setText(savedPlayer.id);
         }
     }
