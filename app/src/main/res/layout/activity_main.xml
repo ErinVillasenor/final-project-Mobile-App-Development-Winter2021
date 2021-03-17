@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:textAppearance="?attr/errorTextAppearance"
+            android:textSize="36dp"
             android:visibility="invisible"
             android:text="@string/loading_error"/>
 

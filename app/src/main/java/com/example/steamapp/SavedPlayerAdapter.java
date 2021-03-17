@@ -25,6 +25,11 @@ public class SavedPlayerAdapter extends RecyclerView.Adapter <SavedPlayerAdapter
         this.onSearchResultClickedListener = onSearchResultClickedListener;
     }
 
+
+    public void updateSavedPlayersData(List<SavedPlayer> savedPlayers) {
+        this.savedPlayerList = savedPlayers;
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         if (this.savedPlayerList == null) {
