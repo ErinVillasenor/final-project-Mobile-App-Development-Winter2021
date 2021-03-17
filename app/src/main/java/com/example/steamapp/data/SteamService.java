@@ -17,4 +17,11 @@ public interface SteamService {
             @Query("steamid") String player_id,
             @Query("key") String api_key
     );
+
+    @GET("IPlayerService/GetOwnedGames/v0001")
+    Call<GamesList> searchGames(
+            @Query("include_appinfo") String include_appinfo,
+            @Query("steamid") String player_id,
+            @Query("key") String api_key
+    );
 }
