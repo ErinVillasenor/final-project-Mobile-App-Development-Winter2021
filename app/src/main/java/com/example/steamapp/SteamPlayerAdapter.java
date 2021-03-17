@@ -40,11 +40,7 @@ public class SteamPlayerAdapter extends RecyclerView.Adapter<SteamPlayerAdapter.
         if (this.playerData == null || this.playerData.getPlayerSummary() == null){
             return 0;
         } else {
-            return 1; // since we always have just one, we need to talk about this though
-            // since we're using a recycler view here, we need to figure out how to have the
-            // header of the recycler view be/show the main player's info, and then below
-            // a list of their friends. This is something similar to assignment 4 extra credit
-            // maybe it's not that complicated but we can ask Rob how to do that???
+            return 1; // since we always have just one player in the main activity
         }
     }
 
@@ -71,6 +67,15 @@ public class SteamPlayerAdapter extends RecyclerView.Adapter<SteamPlayerAdapter.
             this.searchResultTV = itemView.findViewById(R.id.tv_search_result);
             this.playerAvatarIV = itemView.findViewById(R.id.iv_player_avatar);
             this.playerStatusTV = itemView.findViewById(R.id.tv_player_status);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onPlayerClickListener.onPlayerClick(
+                            playerData.getPlayerSummary()
+                    );
+                }
+            });
         }
 
         void bind(PlayerSummary searchResult) {

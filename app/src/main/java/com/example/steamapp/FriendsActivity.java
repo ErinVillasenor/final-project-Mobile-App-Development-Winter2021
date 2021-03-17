@@ -1,6 +1,8 @@
 package com.example.steamapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -13,8 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.steamapp.data.FriendsList;
 import com.example.steamapp.data.LoadingStatus;
+import com.example.steamapp.data.PlayerSummary;
 
 public class FriendsActivity extends AppCompatActivity {
+
+    public static final String EXTRA_PLAYER_DATA = "FriendsActivity.PlayerSummary";
+
     private static final String STEAM_API_KEY = BuildConfig.STEAM_API_KEY;
     private static final String TAG = FriendsActivity.class.getSimpleName();
 
@@ -25,8 +31,10 @@ public class FriendsActivity extends AppCompatActivity {
 
     private SteamFriendAdapter steamFriendAdapter;
 
+    private PlayerSummary playerSummary = null;
+
     // lifecycle stuff
-    private FriendSearchViewModel friendSearchViewModel;
+    private FriendSearchViewModel friendSearchViewModel = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,17 @@ public class FriendsActivity extends AppCompatActivity {
 
         this.friendSearchViewModel = new ViewModelProvider(this)
                 .get(FriendSearchViewModel.class);
+
+        Intent intent = getIntent();
+
+        if (intent != null && intent.hasExtra(EXTRA_PLAYER_DATA)) {
+            this.playerSummary = (PlayerSummary)intent.getSerializableExtra(EXTRA_PLAYER_DATA);
+
+            // DON'T REALLY NEED THIS STUFF, WE ONLY NEED THE STEAM ID, WHICH
+            // WE CAN ACCESS FROM this.playerSummary
+            // TextView playerSummaryTV = findViewById(R.id.tv_friends);
+            // playerSummaryTV.setText(this.playerSummary.getSteamid());
+        }
 
         this.friendSearchViewModel.getFriendSearchResults().observe(
                 this,
@@ -79,4 +98,5 @@ public class FriendsActivity extends AppCompatActivity {
                 }
         );
     }
+
 }

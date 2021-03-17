@@ -27,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.steamapp.data.Friend;
 import com.example.steamapp.data.LoadingStatus;
 import com.example.steamapp.data.PlayerData;
 import com.example.steamapp.data.PlayerSummary;
@@ -58,11 +59,16 @@ public class MainActivity extends AppCompatActivity
     private SteamPlayerAdapter steamPlayerAdapter;
     private SavedPlayerAdapter savedPlayerAdapter;
 
+    // this data structure is used in the player activity
+    private PlayerSummary playerSummary;
+
     // lifecycle stuff
     private SteamSearchViewModel steamSearchViewModel;
     private SavedPlayersViewModel savedPlayersViewModel;
 
     private Toast searchToast;
+
+    private FriendsActivity friendsActivity = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +147,11 @@ public class MainActivity extends AppCompatActivity
                 new Observer<PlayerData>() {
                     @Override
                     public void onChanged(PlayerData playerData) {
-                        steamPlayerAdapter.updateSearchResults(playerData);
+                        if (playerData != null) {
+                            steamPlayerAdapter.updateSearchResults(playerData);
+                            playerSummary = playerData.getPlayerSummary();
+                        }
+
                     }
                 }
         );
@@ -172,6 +182,15 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
         );
+    }
+
+    @Override
+    public void onPlayerClick(PlayerSummary playerSummary){
+        if( this.playerSummary != null ){
+            Intent intent = new Intent(this, FriendsActivity.class);
+            intent.putExtra(FriendsActivity.EXTRA_PLAYER_DATA, this.playerSummary);
+            startActivity(intent);
+        }
     }
 
 
@@ -261,12 +280,11 @@ public class MainActivity extends AppCompatActivity
 //key 76561197960435530
     /*DO NOT DELETE ABOVE^^ Did not combine with below onSharedPreferenceChanged yet */
     
-    @Override
-    public void onPlayerClick(PlayerSummary playerSummary) {
-        Intent intent = new Intent(this, FriendsActivity.class);
-        startActivity(intent);
-
-    }
+//    @Override
+//    public void onPlayerClick(PlayerSummary playerSummary) {
+//        Intent intent = new Intent(this, FriendsActivity.class);
+//        startActivity(intent);
+//    }
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {

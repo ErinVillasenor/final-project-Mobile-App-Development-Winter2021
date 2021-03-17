@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SteamApp">
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".FriendsActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/Theme.SteamApp.NoActionBar"
             android:launchMode="singleTop">
             <intent-filter>

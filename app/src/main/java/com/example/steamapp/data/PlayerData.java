@@ -11,8 +11,7 @@ public class PlayerData {
     // friends
 
     public PlayerData(){
-        // this.playerSummary = null; CHANGE IT TO THIS ONE
-        this.playerSummary = new PlayerSummary(); // JUST FOR TESTING PURPOSES, SINCE I DON'T HAVE THE Recycew
+        this.playerSummary = new PlayerSummary();
     }
 
     public PlayerSummary getPlayerSummary() { return playerSummary; }
