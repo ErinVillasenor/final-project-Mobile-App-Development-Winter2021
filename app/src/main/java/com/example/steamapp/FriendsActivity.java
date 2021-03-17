@@ -25,6 +25,7 @@ import com.example.steamapp.data.PlayerSummary;
 public class FriendsActivity extends AppCompatActivity {
 
     public static final String EXTRA_PLAYER_DATA = "FriendsActivity.PlayerSummary";
+    public static String CURRENT_PLAYER_STEAM_ID;
 
     private static final String STEAM_API_KEY = BuildConfig.STEAM_API_KEY;
     private static final String TAG = FriendsActivity.class.getSimpleName();
@@ -74,6 +75,7 @@ public class FriendsActivity extends AppCompatActivity {
             this.playerSummary = (PlayerSummary)intent.getSerializableExtra(EXTRA_PLAYER_DATA);
         }
 
+        CURRENT_PLAYER_STEAM_ID = this.playerSummary.getSteamid();
         friendSearchViewModel.loadFriendSearchResults(STEAM_API_KEY, this.playerSummary.getSteamid());
 
         this.friendName.setText(this.playerSummary.getPersonaname());
