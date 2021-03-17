@@ -8,6 +8,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,23 +31,25 @@ import com.example.steamapp.data.PlayerData;
 import com.example.steamapp.data.PlayerSummary;
 import com.example.steamapp.data.SavedPlayer;
 import com.google.android.material.navigation.NavigationView;
-
+import java.util.function.LongFunction;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements  SharedPreferences.OnSharedPreferenceChangeListener, NavigationView.OnNavigationItemSelectedListener,
         SteamPlayerAdapter.OnPlayerClickListener, SavedPlayerAdapter.OnSearchResultClickedListener {
 
+
     private static final String STEAM_API_KEY = BuildConfig.STEAM_API_KEY;
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    private SharedPreferences sharedPreferences;
     private RecyclerView searchResultsRV;
     private EditText searchBoxET;
 
     private ProgressBar loadingIndicatorPB;
     private TextView errorMessageTV;
 
-    private SharedPreferences sharedPreferences;
+  //  private SharedPreferences sharedPreferences;
 
 
     private DrawerLayout drawerLayout;
@@ -91,6 +95,9 @@ public class MainActivity extends AppCompatActivity
 
         this.savedPlayerAdapter = new SavedPlayerAdapter(this);
         this.drawerRV.setAdapter(this.savedPlayerAdapter);
+
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        this.sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
         Button searchButton = (Button)findViewById(R.id.btn_search);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -208,22 +215,31 @@ public class MainActivity extends AppCompatActivity
                 return false;
         }
     }
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        long timestamp = (long) System.currentTimeMillis();
-        SavedPlayer savedPlayer = new SavedPlayer(this.sharedPreferences.getString(
-                getString(R.string.pref_player_key),
-                "Robin"
-        ),  "NULL", timestamp);
-        savedPlayersViewModel.insertPlayer(savedPlayer);
-        //   loadingStatus.setValue(LoadingStatus.SUCCESS);
-       // this.loadForecast(); //Our equivalent?
-    }
+//    @Override
+//    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+//        long timestamp = (long) System.currentTimeMillis();
+//        SavedPlayer savedPlayer = new SavedPlayer(this.sharedPreferences.getString(
+//                getString(R.string.pref_player_key),
+//                "Robin"
+//        ),  "NULL", timestamp);
+//        savedPlayersViewModel.insertPlayer(savedPlayer);
+//        //   loadingStatus.setValue(LoadingStatus.SUCCESS);
+//       // this.loadForecast(); //Our equivalent?
+//    }
 //key 76561197960435530
+    /*DO NOT DELETE ABOVE^^ Did not combine with below onSharedPreferenceChanged yet */
+    
     @Override
     public void onPlayerClick(PlayerSummary playerSummary) {
         Intent intent = new Intent(this, FriendsActivity.class);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        String plid = this.sharedPreferences.getString(getString(R.string.pref_player_key), "0");
+        Log.d(TAG,"I'm here");
+        performSteamIDSearch(STEAM_API_KEY, plid);
     }
 }
