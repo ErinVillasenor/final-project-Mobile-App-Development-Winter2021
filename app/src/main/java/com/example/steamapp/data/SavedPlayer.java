@@ -17,7 +17,6 @@ public class SavedPlayer {
     @NonNull
     public long timestamp;
 
-
     public SavedPlayer(String id, long timestamp){
         this.id = id;
      //   this.name = name;
