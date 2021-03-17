@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.steamapp.data.LoadingStatus;
 import com.example.steamapp.data.PlayerData;
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity
 
     // lifecycle stuff
     private SteamSearchViewModel steamSearchViewModel;
+
+    private Toast searchToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,12 @@ public class MainActivity extends AppCompatActivity
                 if (!TextUtils.isEmpty(searchSteamID)) {
                     performSteamIDSearch(STEAM_API_KEY, searchSteamID);
                 }
+                else {
+                    performSteamIDSearch(STEAM_API_KEY, sharedPreferences.getString(
+                            getString(R.string.pref_player_key),
+                            getString(R.string.pref_player_title)
+                    ));
+                }
             }
         });
 
@@ -126,11 +135,13 @@ public class MainActivity extends AppCompatActivity
                             loadingIndicatorPB.setVisibility(View.INVISIBLE);
                             errorMessageTV.setVisibility(View.INVISIBLE);
 
+
                             // use this for RecyclerView
                             // forecastListRV.setVisibility(View.VISIBLE);
                         } else {
                             loadingIndicatorPB.setVisibility(View.INVISIBLE);
                             errorMessageTV.setVisibility(View.VISIBLE);
+                            Log.d(TAG, "Load error ");
 
                             // use this for RecyclerView
                             // forecastListRV.setVisibility(View.INVISIBLE);
@@ -143,6 +154,21 @@ public class MainActivity extends AppCompatActivity
     private void performSteamIDSearch(String API_KEY, String playerID){
         Log.d(TAG, "== user entered this steamID: " + playerID);
         steamSearchViewModel.loadPlayerSearchResults(API_KEY, playerID);
+        SharedPreferences.Editor editor = this.sharedPreferences.edit();
+        editor.putString(getString(R.string.pref_player_key), playerID);
+        editor.commit();
+
+    }
+    public void mToast(){
+        if (this.searchToast != null) {
+            this.searchToast.cancel();
+        }
+        this.searchToast = Toast.makeText(
+                this,
+                getString(R.string.search_success),
+                Toast.LENGTH_LONG
+        );
+        this.searchToast.show();
     }
 
     @Override
@@ -164,6 +190,12 @@ public class MainActivity extends AppCompatActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onDestroy(){
+        this.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+        super.onDestroy();
     }
 
     @Override
@@ -194,7 +226,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         String plid = this.sharedPreferences.getString(getString(R.string.pref_player_key), "0");
-        Log.d(TAG,"I'm here");
         performSteamIDSearch(STEAM_API_KEY, plid);
+        mToast();
     }
 }
