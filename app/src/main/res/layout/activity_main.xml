@@ -43,6 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+
+
         <!--    for error messages-->
         <TextView
             android:id="@+id/tv_error_message"
@@ -65,6 +67,23 @@
     </FrameLayout>
 </LinearLayout>
 
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        >
+
+    <Button
+        android:id="@+id/btn_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:gravity="center"
+        android:text="Video Player"/>
+
+        </LinearLayout>
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rv_nav_drawer"
     android:layout_width="300dp"
