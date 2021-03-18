@@ -76,13 +76,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         this.loadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
         this.searchBoxET = findViewById(R.id.et_search_box);
         this.searchResultsRV = findViewById(R.id.rv_search_results);
 
         this.searchResultsRV.setLayoutManager(new LinearLayoutManager(this));
         this.searchResultsRV.setHasFixedSize(true);
-
 
         this.drawerLayout = findViewById(R.id.drawer_layout);
 
