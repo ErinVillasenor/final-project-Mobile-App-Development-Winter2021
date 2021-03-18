@@ -27,7 +27,8 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:textSize="22sp"
-        android:text="You Got Rick Rolled!"/>
+        android:layout_gravity="center"
+        android:text="Steam Guide for Beginners"/>
 
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/youtube_view"
