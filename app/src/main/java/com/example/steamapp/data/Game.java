@@ -2,9 +2,7 @@ package com.example.steamapp.data;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Game {
 
