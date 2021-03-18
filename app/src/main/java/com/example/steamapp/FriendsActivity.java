@@ -198,7 +198,7 @@ public class FriendsActivity extends AppCompatActivity {
                 this.pState = "Thinking";
         }
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        String shareText = "Check out my status on steam!: " + pState;
+        String shareText = "Check out " + this.playerSummary.getPersonaname() +"'s status on steam!: " + pState;
         shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
         shareIntent.setType("text/plain");
         Intent chooserIntent = Intent.createChooser(shareIntent, null);
