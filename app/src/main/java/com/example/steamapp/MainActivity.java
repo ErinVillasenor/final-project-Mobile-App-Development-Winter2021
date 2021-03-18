@@ -290,8 +290,32 @@ public class MainActivity extends AppCompatActivity
         String plid = this.sharedPreferences.getString(getString(R.string.pref_player_key), "0");
         performSteamIDSearch(STEAM_API_KEY, plid);
         long ltime = System.currentTimeMillis();
+        boolean isValidString = false;
         SavedPlayer savedPlayer = new SavedPlayer(plid, ltime);
-        savedPlayersViewModel.insertPlayer(savedPlayer);
-        mToast();
+
+        if (savedPlayer.id == null || savedPlayer.id.length() != 17)
+        {
+            Log.d(TAG,   "Unable to add to database");
+
+        }
+        else {
+            for (int i = 0; i < 17; i++)
+            {
+                if (savedPlayer.id.charAt(i) <= '0' || savedPlayer.id.charAt(i) >= '9')
+                {
+                    Log.d(TAG,   "Unable to add to database");
+                    break;
+                }
+         else{
+
+            }
+                isValidString = true;
+
+            }
+            if (isValidString == true) {
+                savedPlayersViewModel.insertPlayer(savedPlayer);
+                mToast();
+            }
+        }
     }
 }
