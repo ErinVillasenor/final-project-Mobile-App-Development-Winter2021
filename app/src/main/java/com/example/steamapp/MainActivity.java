@@ -270,10 +270,6 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.nav_search:
                 return true;
-//            case R.id.nav_bookmarked_repos:
-//                Intent bookmarkedReposIntent = new Intent(this, BookmarkedRepos.class);
-//                startActivity(bookmarkedReposIntent);
-//                return true;
             case R.id.nav_settings:
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);
                 startActivity(settingsIntent);
@@ -282,25 +278,9 @@ public class MainActivity extends AppCompatActivity
                 return false;
         }
     }
-//    @Override
-//    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-//        long timestamp = (long) System.currentTimeMillis();
-//        SavedPlayer savedPlayer = new SavedPlayer(this.sharedPreferences.getString(
-//                getString(R.string.pref_player_key),
-//                "Robin"
-//        ),  "NULL", timestamp);
-//        savedPlayersViewModel.insertPlayer(savedPlayer);
-//        //   loadingStatus.setValue(LoadingStatus.SUCCESS);
-//       // this.loadForecast(); //Our equivalent?
-//    }
+
 //key 76561197960435530
-    /*DO NOT DELETE ABOVE^^ Did not combine with below onSharedPreferenceChanged yet */
-    
-//    @Override
-//    public void onPlayerClick(PlayerSummary playerSummary) {
-//        Intent intent = new Intent(this, FriendsActivity.class);
-//        startActivity(intent);
-//    }
+
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
