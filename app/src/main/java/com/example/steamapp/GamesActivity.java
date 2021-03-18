@@ -1,8 +1,6 @@
 package com.example.steamapp;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.steamapp.data.GamesList;
 import com.example.steamapp.data.LoadingStatus;
-import com.example.steamapp.data.PlayerSummary;
 
 public class GamesActivity extends AppCompatActivity {
 

@@ -1,6 +1,5 @@
 package com.example.steamapp.data;
 
-import com.example.steamapp.FriendsActivity;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

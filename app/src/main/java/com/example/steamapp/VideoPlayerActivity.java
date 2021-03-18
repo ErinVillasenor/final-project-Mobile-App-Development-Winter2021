@@ -1,13 +1,8 @@
 package com.example.steamapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.audiofx.DynamicsProcessing;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
