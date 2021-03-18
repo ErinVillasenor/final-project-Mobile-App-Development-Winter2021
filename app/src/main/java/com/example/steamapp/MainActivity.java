@@ -295,6 +295,7 @@ public class MainActivity extends AppCompatActivity
 
         if (savedPlayer.id == null || savedPlayer.id.length() != 17)
         {
+            searchResultsRV.setVisibility(View.INVISIBLE);
             Log.d(TAG,   "Unable to add to database");
 
         }
@@ -303,16 +304,19 @@ public class MainActivity extends AppCompatActivity
             {
                 if (savedPlayer.id.charAt(i) <= '0' || savedPlayer.id.charAt(i) >= '9')
                 {
+                    searchResultsRV.setVisibility(View.INVISIBLE);
                     Log.d(TAG,   "Unable to add to database");
                     break;
                 }
          else{
 
-            }
+           }
                 isValidString = true;
 
             }
             if (isValidString == true) {
+                searchResultsRV.setVisibility(View.VISIBLE);
+                errorMessageTV.setVisibility(View.INVISIBLE);
                 savedPlayersViewModel.insertPlayer(savedPlayer);
                 mToast();
             }
