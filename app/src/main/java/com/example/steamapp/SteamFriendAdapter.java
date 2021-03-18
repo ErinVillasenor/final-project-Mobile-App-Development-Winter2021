@@ -1,6 +1,7 @@
 package com.example.steamapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +58,7 @@ public class SteamFriendAdapter extends RecyclerView.Adapter<SteamFriendAdapter.
             Context ctx = this.itemView.getContext();
 
             // Display persona name
+            // this.searchResultTV.setTextColor(Color.parseColor("#ffffff"));
             this.searchResultTV.setText(searchResult.getSteamid());
         }
     }

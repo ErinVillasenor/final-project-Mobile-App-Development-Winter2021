@@ -106,6 +106,15 @@ public class MainActivity extends AppCompatActivity
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         this.sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
+        Button videoButton = (Button)findViewById(R.id.btn_video);
+        videoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               playVideo();
+            }
+        });
+
+
         Button searchButton = (Button)findViewById(R.id.btn_search);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,6 +190,10 @@ public class MainActivity extends AppCompatActivity
         );
     }
 
+    public void playVideo(){
+        Intent videoPlayerActivityIntent = new Intent(this, VideoPlayerActivity.class);
+        startActivity(videoPlayerActivityIntent);
+    }
     @Override
     public void onPlayerClick(PlayerSummary playerSummary){
         if( this.playerSummary != null ){
