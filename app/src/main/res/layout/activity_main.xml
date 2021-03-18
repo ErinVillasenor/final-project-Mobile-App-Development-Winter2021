@@ -66,14 +66,27 @@
         </FrameLayout>
     </LinearLayout>
 
-    <!--    drawer stuff-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        >
+
+    <Button
+        android:id="@+id/btn_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:gravity="center"
+        android:text="Video Player"/>
+
+        </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_nav_drawer"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:background="@color/drawer_color"
-        />
+        android:background="@color/drawer_color"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
