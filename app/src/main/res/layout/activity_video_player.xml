@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:id="@+id/actionbartitle"
-        android:background="@color/purple_500"
+        android:background="@color/drawer_color"
         android:maxLines="1"
         android:textSize="16sp"
         android:textStyle="bold"

@@ -1,5 +1,6 @@
 package com.example.steamapp;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,9 @@ public class SavedPlayerAdapter extends RecyclerView.Adapter <SavedPlayerAdapter
 
         void bind(SavedPlayer savedPlayer){
             //savedNameTV.setText(savedPlayer.name);
-            savedidTV.setText(savedPlayer.id);
+            this.savedidTV.setTextColor(Color.parseColor("#ffffff"));
+            this.savedidTV.setText(savedPlayer.id);
+
         }
     }
 }
