@@ -1,14 +1,16 @@
 package com.example.steamapp.data;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 
-public class GameInfo {
+public class GameInfo implements Serializable {
     private String name;
 
     @SerializedName("img_logo_url")
@@ -41,14 +43,14 @@ public class GameInfo {
     public String getImgLogoUrl() { return this.imgLogoUrl; }
 
     public static class JsonDeserializer implements com.google.gson.JsonDeserializer<GameInfo> {
+
         @Override
         public GameInfo deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            JsonObject gamesListObj = json.getAsJsonObject();
-            JsonObject gamesObj = gamesListObj.getAsJsonObject("games");
-
+            JsonObject gamesObj = json.getAsJsonObject();
+            
             return new GameInfo(
                     gamesObj.getAsJsonPrimitive("name").getAsString(),
-                    gamesObj.getAsJsonPrimitive("img_url_logo").getAsString()
+                    gamesObj.getAsJsonPrimitive("img_logo_url").getAsString()
             );
         }
     }
