@@ -80,7 +80,28 @@
         android:gravity="center"
         android:text="Video Player"/>
 
+
         </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button_share"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:gravity="center"
+        android:text="Share with a friend!"
+/>
+
+    </LinearLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_nav_drawer"
         android:layout_width="300dp"

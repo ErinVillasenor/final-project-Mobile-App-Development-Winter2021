@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity
 
     private FriendsActivity friendsActivity = null;
 
+    public int myPersonaStateInt;
+    public String myPersonaState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,6 +135,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        Button shareButton = findViewById(R.id.button_share);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareWithFriend(myPersonaStateInt);
+            }
+        });
 
         this.savedPlayersViewModel.getAllSavedPlayers().observe(this, new Observer<List<SavedPlayer>>() {
             @Override
@@ -157,6 +167,7 @@ public class MainActivity extends AppCompatActivity
                         if (playerData != null) {
                             steamPlayerAdapter.updateSearchResults(playerData);
                             playerSummary = playerData.getPlayerSummary();
+                            myPersonaStateInt = playerSummary.getPersonastate();
                         }
 
                     }
@@ -193,6 +204,46 @@ public class MainActivity extends AppCompatActivity
     public void playVideo(){
         Intent videoPlayerActivityIntent = new Intent(this, VideoPlayerActivity.class);
         startActivity(videoPlayerActivityIntent);
+    }
+
+    public void shareWithFriend(int myPersonaStateInt){
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        switch (myPersonaStateInt) {
+            case 0:
+                myPersonaState = "Offline";
+                break;
+            case 1:
+                myPersonaState = "Online";
+                break;
+            case 2:
+                myPersonaState = "Busy";
+                break;
+            case 3:
+                myPersonaState = "Away";
+                break;
+            case 4:
+                myPersonaState = "Snooze";
+                break;
+            case 5:
+                myPersonaState = "Looking to Trade";
+                break;
+            case 6:
+                myPersonaState = "Looking to Play";
+                break;
+            default:
+                myPersonaState = "Thinking";
+        }
+        if (myPersonaState != null) {
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Check out my status on steam!: " + myPersonaState);
+            sendIntent.setType("text/plain");
+        }
+        else {
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Check out my status on steam! I don't have one yet!" );
+            sendIntent.setType("text/plain");
+        }
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
     }
     @Override
     public void onPlayerClick(PlayerSummary playerSummary){
