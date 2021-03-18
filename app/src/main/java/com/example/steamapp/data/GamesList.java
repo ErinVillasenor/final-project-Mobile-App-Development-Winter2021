@@ -7,7 +7,7 @@ public class GamesList {
     public Game games;
 
     public GamesList(){
-        this.games = null;
+        this.games = new Game();
     }
 
     public Game getGames() { return games; }

@@ -68,10 +68,12 @@ public class GameSearchRepository {
                         Log.d(TAG, "response data: " + response.body());
                         Log.d(TAG, "response code:: " + response.code());
 
+                        Log.d(TAG, "GameSearchRepository SUCCESSful API request: " + call.request().url());
+
                         gamesList.setValue(response.body());
                         loadingStatus.setValue(LoadingStatus.SUCCESS);
 
-                        Log.d(TAG, "SUCCESSful API request: " + call.request().url());
+
                     } else {
                         loadingStatus.setValue(LoadingStatus.ERROR);
                         Log.d(TAG, "error response code: " + response.code());
