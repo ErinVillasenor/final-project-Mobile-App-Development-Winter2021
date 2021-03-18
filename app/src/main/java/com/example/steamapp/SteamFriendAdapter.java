@@ -35,7 +35,7 @@ public class SteamFriendAdapter extends RecyclerView.Adapter<SteamFriendAdapter.
     @Override
     public SteamFriendAdapter.SearchResultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.search_result_item, parent, false);
+        View view = inflater.inflate(R.layout.friend_list, parent, false);
         return new SteamFriendAdapter.SearchResultViewHolder(view);
     }
 
@@ -49,7 +49,7 @@ public class SteamFriendAdapter extends RecyclerView.Adapter<SteamFriendAdapter.
 
         SearchResultViewHolder(View itemView) {
             super(itemView);
-            this.searchResultTV = itemView.findViewById(R.id.tv_search_result);
+            this.searchResultTV = itemView.findViewById(R.id.tv_friend_id_new);
         }
 
         void bind(FriendInfo searchResult) {
