@@ -41,6 +41,7 @@ public class FriendsActivity extends AppCompatActivity {
     private TextView friendName;
     private TextView friendStatus;
     private ImageView friendAvatar;
+    private String pState;
 
     // lifecycle stuff
     private FriendSearchViewModel friendSearchViewModel = null;
@@ -159,9 +160,50 @@ public class FriendsActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, GamesActivity.class);
                 startActivity(intent);
                 return true;
+
+            case R.id.action_share:
+                shareStatus();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void shareStatus(){
+        int myPersonaStateInt = this.playerSummary.getPersonastate();
+
+        switch (myPersonaStateInt) {
+            case 0:
+                this.pState = "Offline";
+                break;
+            case 1:
+                this.pState = "Online";
+                break;
+            case 2:
+                this.pState = "Busy";
+                break;
+            case 3:
+                this.pState = "Away";
+                break;
+            case 4:
+                this.pState = "Snooze";
+                break;
+            case 5:
+                this.pState = "Looking to Trade";
+                break;
+            case 6:
+               this.pState = "Looking to Play";
+                break;
+            default:
+                this.pState = "Thinking";
+        }
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        String shareText = "Check out my status on steam!: " + pState;
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+        shareIntent.setType("text/plain");
+        Intent chooserIntent = Intent.createChooser(shareIntent, null);
+        startActivity(chooserIntent);
+
     }
 
 }
