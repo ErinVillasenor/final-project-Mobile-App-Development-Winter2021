@@ -26,7 +26,11 @@ public class SteamGameAdapter extends RecyclerView.Adapter<SteamGameAdapter.Sear
     public int getItemCount() {
         if (this.gamesList == null || this.gamesList.getGames() == null) {
             return 0;
-        } else {
+        }
+        else if (this.gamesList.getGames().getGameInfo() == null){
+            return -1;
+        }
+        else {
             return this.gamesList.getGames().getGameInfo().size();
         }
     }

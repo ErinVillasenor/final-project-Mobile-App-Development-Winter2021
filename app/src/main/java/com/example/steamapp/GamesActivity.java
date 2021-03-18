@@ -2,9 +2,11 @@ package com.example.steamapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -30,12 +32,12 @@ public class GamesActivity extends AppCompatActivity {
 
     // lifecycle stuff
     private GameSearchViewModel gameSearchViewModel = null;
+    private Toast noGamesToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_games);
-
         this.loadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
         this.searchResultsRV = findViewById(R.id.rv_search_results);
 
@@ -48,11 +50,19 @@ public class GamesActivity extends AppCompatActivity {
         this.steamGameAdapter = new SteamGameAdapter();
         this.searchResultsRV.setAdapter(steamGameAdapter);
 
+
         this.gameSearchViewModel = new ViewModelProvider(this)
                 .get(GameSearchViewModel.class);
 
         String includeAppInfo = "true";
         gameSearchViewModel.loadGameSearchResults(STEAM_API_KEY, FriendsActivity.CURRENT_PLAYER_STEAM_ID, includeAppInfo);
+
+        this.noGamesToast = Toast.makeText(
+                        this,
+                        getString(R.string.games_toast),
+                        Toast.LENGTH_LONG
+                );
+
 
         this.gameSearchViewModel.getGameSearchResults().observe(
                 this,
@@ -60,6 +70,14 @@ public class GamesActivity extends AppCompatActivity {
                     @Override
                     public void onChanged(GamesList GamesList) {
                         steamGameAdapter.updateSearchResults(GamesList);
+                        if (steamGameAdapter.getItemCount() == -1) {
+                            if (noGamesToast != null) {
+                                noGamesToast.cancel();
+                            }
+                            noGamesToast.show();
+                            onBackPressed();
+                        }
+
                     }
                 }
         );
@@ -75,6 +93,7 @@ public class GamesActivity extends AppCompatActivity {
 
                             loadingIndicatorPB.setVisibility(View.INVISIBLE);
                             errorMessageTV.setVisibility(View.INVISIBLE);
+
 
                         } else {
 
