@@ -2,6 +2,7 @@ package com.example.steamapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -253,6 +254,9 @@ public class MainActivity extends AppCompatActivity
             case android.R.id.home:
                 this.drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.action_news:
+                getNews();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -318,5 +322,11 @@ public class MainActivity extends AppCompatActivity
                 mToast();
             }
         }
+    }
+
+    public void getNews(){
+        Intent newsIntent = new Intent(Intent.ACTION_VIEW);
+        newsIntent.setData(Uri.parse("https://store.steampowered.com/explore/new/"));
+        startActivity(newsIntent);
     }
 }
