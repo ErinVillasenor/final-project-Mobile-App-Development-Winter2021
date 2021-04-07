@@ -1,5 +1,5 @@
 # final-project-Mobile-App-Development-Winter2021
-A mobile app that uses the Steam API to search for users, store them in a SQLite database, and retrieves their games and friends.
+A mobile app for Android written in Java that uses the Steam API to search for users, store them in a SQLite database, and retrieves their games and friends.
 This project was worked on by 
 Jaiden Hodson,
 Miguel Angel Gaspar Marquez,
